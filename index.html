@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이음말 교실 — 참가 신청</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --p:#6C5CE7;--p2:#a29bfe;--p3:#f0eeff;--p4:rgba(108,92,231,.1);
+  --r:#E84393;--r2:#f38ec4;--r3:#fef0f7;--r4:rgba(232,67,147,.1);
+  --g:#00b894;--g2:#55efc4;
+  --coral:#e17055;
+  --txt:#1a1a2e;--txt2:#555577;--txt3:#9898b3;
+  --bg:#ffffff;--bg2:#f7f7fc;--bg3:#f0f0f8;
+  --bd:#e4e4f0;--bd2:#d0d0e8;
+  --rsm:10px;--rmd:14px;--rlg:20px;--rxl:28px;
+  --shadow:0 2px 12px rgba(108,92,231,.08);
+  --shadow-lg:0 8px 32px rgba(108,92,231,.12);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg2);font-family:'Apple SD Gothic Neo','Noto Sans KR',sans-serif;color:var(--txt);min-height:100vh}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--bd);padding:0 1.5rem}
+.nav-inner{max-width:680px;margin:0 auto;height:52px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:15px;font-weight:700;color:var(--p);letter-spacing:-.5px}
+.nav-logo span{color:var(--txt2);font-weight:400}
+.nav-admin{font-size:12px;color:var(--txt3);background:none;border:1px solid var(--bd);padding:5px 14px;border-radius:20px;cursor:pointer;font-family:inherit;transition:all .15s}
+.nav-admin:hover{color:var(--txt2);border-color:var(--bd2)}
+
+.page{max-width:680px;margin:0 auto;padding:2rem 1rem 5rem}
+
+/* HERO */
+.hero{border-radius:var(--rxl);overflow:hidden;position:relative;padding:3rem 2.5rem 2.5rem;margin-bottom:1.5rem;background:var(--bg);box-shadow:var(--shadow)}
+.blobs{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(60px)}
+.b1{width:300px;height:300px;background:#6C5CE7;opacity:.11;top:-80px;left:-60px}
+.b2{width:250px;height:250px;background:#E84393;opacity:.09;bottom:-80px;right:-40px}
+.b3{width:180px;height:180px;background:#00b894;opacity:.09;top:30px;right:80px}
+.hero-body{position:relative;z-index:1}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--p);background:var(--p4);padding:5px 14px;border-radius:20px;border:1px solid rgba(108,92,231,.2);margin-bottom:1.25rem}
+.hero h1{font-size:34px;font-weight:700;letter-spacing:-1.5px;line-height:1.15;margin-bottom:.75rem}
+.acc{background:linear-gradient(135deg,var(--p),var(--r));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-desc{font-size:14px;color:var(--txt2);line-height:1.85;margin-bottom:1.75rem}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px}
+.htag{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:5px 13px;border-radius:20px}
+.htag-p{background:var(--p4);color:var(--p)}
+.htag-r{background:var(--r4);color:var(--r)}
+.htag-g{background:rgba(0,184,148,.1);color:#007a62}
+
+/* TRACK TABS */
+.tab-wrap{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.5rem}
+.tab{border-radius:var(--rlg);padding:1.25rem 1.5rem;cursor:pointer;border:2px solid var(--bd);background:var(--bg);transition:all .2s;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.tab::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .2s}
+.tab.viet::before{background:linear-gradient(135deg,rgba(108,92,231,.06),rgba(162,155,254,.04))}
+.tab.russ::before{background:linear-gradient(135deg,rgba(232,67,147,.06),rgba(243,142,196,.04))}
+.tab.active.viet{border-color:var(--p);box-shadow:0 0 0 4px rgba(108,92,231,.08),var(--shadow)}
+.tab.active.viet::before{opacity:1}
+.tab.active.russ{border-color:var(--r);box-shadow:0 0 0 4px rgba(232,67,147,.08),var(--shadow)}
+.tab.active.russ::before{opacity:1}
+.tab-body{position:relative;z-index:1}
+.tab-flag{font-size:28px;margin-bottom:.5rem}
+.tab-name{font-size:15px;font-weight:700;color:var(--txt);margin-bottom:2px}
+.tab-sub{font-size:12px;color:var(--txt3)}
+.tab-check{position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;display:none;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700}
+.tab.active.viet .tab-check{display:flex;background:var(--p)}
+.tab.active.russ .tab-check{display:flex;background:var(--r)}
+
+/* SLOTS */
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.5rem}
+.sc{background:var(--bg);border-radius:var(--rmd);border:1px solid var(--bd);padding:1rem 1.25rem;overflow:hidden;position:relative;box-shadow:var(--shadow)}
+.sc::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:3px 3px 0 0}
+.sc-total::after{background:var(--bd2)}
+.sc-remain::after{background:linear-gradient(90deg,var(--p),var(--p2))}
+.sc-remain.rm{background:linear-gradient(90deg,var(--r),var(--r2))}
+.sc-done::after{background:linear-gradient(90deg,var(--g),var(--g2))}
+.snum{font-size:26px;font-weight:700;letter-spacing:-1px;color:var(--txt)}
+.sc-remain .snum{color:var(--p)}
+.sc-remain.rm .snum{color:var(--r)}
+.snum.warn{color:var(--coral)!important}
+.slbl{font-size:11px;font-weight:600;color:var(--txt3);letter-spacing:.4px;margin-top:2px}
+.prog-track{height:3px;background:var(--bg3);border-radius:2px;margin-top:10px;overflow:hidden}
+.prog-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--p),var(--p2));transition:width .6s cubic-bezier(.4,0,.2,1)}
+.prog-fill.rm{background:linear-gradient(90deg,var(--r),var(--r2))}
+.prog-fill.warn{background:linear-gradient(90deg,#fdcb6e,var(--coral))}
+
+.closed-banner{display:none;border-radius:var(--rmd);padding:1.25rem 1.5rem;text-align:center;margin-bottom:1.5rem;background:#fff5f5;border:1px solid rgba(225,112,85,.3)}
+.closed-banner p{font-size:14px;font-weight:600;color:var(--coral)}
+
+/* SECTION */
+.sec{background:var(--bg);border:1px solid var(--bd);border-radius:var(--rlg);padding:1.5rem;margin-bottom:12px;box-shadow:var(--shadow)}
+.sec-head{display:flex;align-items:center;gap:10px;margin-bottom:1.25rem;padding-bottom:12px;border-bottom:1px solid var(--bd)}
+.sico{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.si-v{background:var(--p4);color:var(--p)}
+.si-g{background:rgba(0,184,148,.1);color:#007a62}
+.si-a{background:rgba(253,203,110,.2);color:#997a00}
+.si-r{background:var(--r4);color:var(--r)}
+.sec-title{font-size:14px;font-weight:700;color:var(--txt)}
+.sec-sub{font-size:12px;color:var(--txt3);margin-top:1px}
+
+/* TRACK BANNER */
+.tbanner{border-radius:var(--rmd);padding:11px 16px;margin-bottom:12px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px}
+.tbanner.viet{background:var(--p4);color:var(--p);border:1px solid rgba(108,92,231,.2)}
+.tbanner.russ{background:var(--r4);color:var(--r);border:1px solid rgba(232,67,147,.2)}
+
+/* FIELDS */
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fg.full{grid-template-columns:1fr}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:12px;font-weight:600;color:var(--txt2)}
+.req{color:var(--coral);margin-left:2px}
+.field input,.field select,.field textarea{font-size:13px;padding:9px 12px;border:1px solid var(--bd2);border-radius:var(--rsm);background:var(--bg);color:var(--txt);font-family:inherit;transition:border-color .15s,box-shadow .15s;outline:none;width:100%}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(108,92,231,.1)}
+.russ-mode .field input:focus,.russ-mode .field select:focus,.russ-mode .field textarea:focus{border-color:var(--r);box-shadow:0 0 0 3px rgba(232,67,147,.1)}
+.field textarea{resize:vertical;min-height:84px;line-height:1.7}
+.ccount{font-size:11px;color:var(--txt3);text-align:right;margin-top:2px}
+
+/* CHIPS */
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:3px}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--bd2);color:var(--txt2);transition:all .15s;background:var(--bg2)}
+.chip input{display:none}
+.chip:hover,.chip.on{border-color:var(--p);color:var(--p);background:var(--p4)}
+.russ-mode .chip:hover,.russ-mode .chip.on{border-color:var(--r);color:var(--r);background:var(--r4)}
+
+/* AGREE */
+.agree-box{display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--bg2);border-radius:var(--rmd);cursor:pointer;border:1px solid transparent;transition:border-color .15s}
+.agree-box:hover{border-color:var(--bd2)}
+.agree-box input{flex-shrink:0;margin-top:2px;accent-color:var(--p)}
+.russ-mode .agree-box input{accent-color:var(--r)}
+.agree-txt{font-size:12px;color:var(--txt2);line-height:1.75}
+.agree-txt strong{color:var(--txt);font-weight:600}
+
+/* SUBMIT */
+.btn-submit{width:100%;padding:16px;border:none;border-radius:var(--rmd);font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .2s,transform .1s;font-family:inherit;letter-spacing:-.3px}
+.btn-submit.viet{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;box-shadow:0 4px 16px rgba(108,92,231,.3)}
+.btn-submit.russ{background:linear-gradient(135deg,var(--r),var(--r2));color:#fff;box-shadow:0 4px 16px rgba(232,67,147,.3)}
+.btn-submit:hover{opacity:.9}
+.btn-submit:active{transform:scale(.99)}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* SUCCESS */
+.success-box{display:none;background:var(--bg);border:1px solid var(--bd);border-radius:var(--rxl);padding:3rem 2rem;text-align:center;margin-bottom:1rem;box-shadow:var(--shadow-lg)}
+.s-circle{width:76px;height:76px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:32px;color:#fff}
+.s-circle.viet{background:linear-gradient(135deg,var(--p),var(--p2))}
+.s-circle.russ{background:linear-gradient(135deg,var(--r),var(--r2))}
+.success-box h2{font-size:22px;font-weight:700;color:var(--txt);margin-bottom:.5rem;letter-spacing:-.5px}
+.success-box p{font-size:13px;color:var(--txt2);line-height:1.85}
+.s-track-badge{display:inline-flex;align-items:center;gap:6px;margin-top:1rem;padding:8px 20px;border-radius:20px;font-size:13px;font-weight:700}
+.s-track-badge.viet{background:var(--p4);color:var(--p)}
+.s-track-badge.russ{background:var(--r4);color:var(--r)}
+.s-num{display:block;margin-top:.5rem;font-size:12px;color:var(--txt3)}
+
+/* ADMIN */
+.admin-panel{display:none;background:var(--bg);border:1px solid var(--bd);border-radius:var(--rxl);padding:1.5rem;margin-top:1rem;box-shadow:var(--shadow)}
+.atabs{display:flex;gap:8px;margin-bottom:1.25rem}
+.atab{padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid var(--bd2);color:var(--txt2);background:none;font-family:inherit;transition:all .15s}
+.atab.av{background:var(--p4);border-color:var(--p);color:var(--p)}
+.atab.ar{background:var(--r4);border-color:var(--r);color:var(--r)}
+.admin-ctrl{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--bd)}
+.admin-stat{font-size:13px;color:var(--txt2);flex:1;min-width:120px}
+.cap-row{display:flex;align-items:center;gap:6px}
+.cap-row label{font-size:12px;color:var(--txt3);font-weight:600}
+.cap-row input{width:58px;font-size:13px;padding:5px 8px;border:1px solid var(--bd2);border-radius:var(--rsm);font-family:inherit;text-align:center}
+.bsm{display:inline-flex;align-items:center;gap:4px;font-size:12px;padding:6px 12px;border-radius:var(--rsm);cursor:pointer;background:none;border:1px solid var(--bd2);color:var(--txt2);font-family:inherit;font-weight:600;transition:background .15s}
+.bsm:hover{background:var(--bg2)}
+.bsm.danger{border-color:rgba(225,112,85,.4);color:var(--coral)}
+.bsm.danger:hover{background:rgba(225,112,85,.06)}
+.atbl{width:100%;border-collapse:collapse;font-size:12px}
+.atbl th{text-align:left;padding:8px 10px;font-weight:700;color:var(--txt3);border-bottom:1px solid var(--bd);white-space:nowrap;font-size:11px;letter-spacing:.3px}
+.atbl td{padding:8px 10px;border-bottom:1px solid var(--bd);color:var(--txt)}
+.atbl tr:last-child td{border-bottom:none}
+.nbadge{display:inline-block;padding:2px 8px;border-radius:20px;font-weight:700;font-size:11px}
+.nbadge.v{background:var(--p4);color:var(--p)}
+.nbadge.r{background:var(--r4);color:var(--r)}
+.no-data{text-align:center;padding:2.5rem;color:var(--txt3);font-size:13px}
+
+/* PW MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(26,26,46,.4);align-items:center;justify-content:center;z-index:999;backdrop-filter:blur(4px)}
+.overlay.open{display:flex}
+.pw-box{background:var(--bg);border-radius:var(--rxl);border:1px solid var(--bd);padding:1.75rem;width:300px;box-shadow:var(--shadow-lg)}
+.pw-box h3{font-size:15px;font-weight:700;margin-bottom:1rem;color:var(--txt);letter-spacing:-.3px}
+.pw-box input{width:100%;font-size:14px;padding:10px 14px;border:1px solid var(--bd2);border-radius:var(--rsm);margin-bottom:.75rem;font-family:inherit;outline:none;transition:border-color .15s,box-shadow .15s}
+.pw-box input:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(108,92,231,.1)}
+.pw-err{font-size:12px;color:var(--coral);font-weight:600;margin-bottom:.75rem;display:none}
+.pw-btns{display:flex;gap:8px}
+.pw-btns button{flex:1;padding:10px;border-radius:var(--rsm);cursor:pointer;font-size:13px;font-weight:700;border:1px solid var(--bd2);background:none;font-family:inherit;color:var(--txt);transition:background .15s}
+.pw-ok{background:var(--p)!important;color:#fff!important;border-color:var(--p)!important}
+
+@media(max-width:520px){
+  .fg{grid-template-columns:1fr}
+  .hero{padding:2rem 1.25rem}
+  .hero h1{font-size:26px}
+  .slots{gap:8px}
+  .snum{font-size:20px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">이음말 교실 <span>/ 참가 신청</span></div>
+    <button class="nav-admin" onclick="openPw()"><i class="ti ti-settings" style="font-size:12px;vertical-align:-1px;margin-right:4px"></i>관리자</button>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="blobs"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+    <div class="hero-body">
+      <div class="eyebrow"><i class="ti ti-language"></i> 2026 국립대학육성사업</div>
+      <h1><span class="acc">이음말</span> 교실</h1>
+      <p class="hero-desc">예비 교사를 위한 언어 체험 프로그램.<br>베트남어·러시아어로 학생과 처음 이어지는 한 마디를 시작해 보세요.</p>
+      <div class="hero-tags">
+        <span class="htag htag-p"><i class="ti ti-flag"></i> 베트남어 트랙</span>
+        <span class="htag htag-r"><i class="ti ti-flag"></i> 러시아어 트랙</span>
+        <span class="htag htag-g"><i class="ti ti-users"></i> 트랙별 선착순 30명</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRACK SELECT -->
+  <div class="tab-wrap">
+    <div class="tab viet active" onclick="selectTrack('viet')">
+      <div class="tab-check"><i class="ti ti-check" style="font-size:11px"></i></div>
+      <div class="tab-body">
+        <div class="tab-flag">🇻🇳</div>
+        <div class="tab-name">베트남어 트랙</div>
+        <div class="tab-sub" id="viet-tab-sub">선착순 모집 중</div>
+      </div>
+    </div>
+    <div class="tab russ" onclick="selectTrack('russ')">
+      <div class="tab-check"><i class="ti ti-check" style="font-size:11px"></i></div>
+      <div class="tab-body">
+        <div class="tab-flag">🇷🇺</div>
+        <div class="tab-name">러시아어 트랙</div>
+        <div class="tab-sub" id="russ-tab-sub">선착순 모집 중</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLOTS -->
+  <div class="slots">
+    <div class="sc sc-total">
+      <div class="snum" id="cap-disp">30</div>
+      <div class="slbl">모집 인원</div>
+    </div>
+    <div class="sc sc-remain" id="sc-remain">
+      <div class="snum" id="remain-disp">30</div>
+      <div class="slbl">남은 자리</div>
+      <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+    </div>
+    <div class="sc sc-done">
+      <div class="snum" id="applied-disp">0</div>
+      <div class="slbl">신청 완료</div>
+    </div>
+  </div>
+
+  <div class="closed-banner" id="closed-banner">
+    <p><i class="ti ti-lock"></i> 해당 트랙의 선착순 모집이 마감되었습니다.</p>
+  </div>
+
+  <!-- FORM -->
+  <div id="form-area">
+    <div class="tbanner viet" id="track-banner">🇻🇳 베트남어 트랙으로 신청합니다</div>
+
+    <!-- 기본 정보 -->
+    <div class="sec" id="sec-info">
+      <div class="sec-head">
+        <div class="sico si-v" id="si-info"><i class="ti ti-user"></i></div>
+        <div><div class="sec-title">기본 정보</div><div class="sec-sub">신청자 인적 사항을 입력해 주세요</div></div>
+      </div>
+      <div class="fg" style="gap:10px">
+        <div class="field"><label>이름 <span class="req">*</span></label><input type="text" id="f-name" placeholder="홍길동" maxlength="20"></div>
+        <div class="field"><label>학번 <span class="req">*</span></label><input type="text" id="f-sid" placeholder="2024XXXXX" maxlength="10"></div>
+        <div class="field"><label>학년 <span class="req">*</span></label>
+          <select id="f-year">
+            <option value="">선택해 주세요</option>
+            <option>1학년</option><option>2학년</option><option>3학년</option><option>4학년</option>
+          </select>
+        </div>
+        <div class="field"><label>심화전공 <span class="req">*</span></label>
+          <select id="f-major">
+            <option value="">선택해 주세요</option>
+            <option>윤리교육과</option>
+            <option>국어교육과</option>
+            <option>사회과교육과</option>
+            <option>수학교육과</option>
+            <option>과학교육과</option>
+            <option>체육교육과</option>
+            <option>음악교육과</option>
+            <option>미술교육과</option>
+            <option>영어교육과</option>
+            <option>컴퓨터교육과</option>
+            <option>실과교육과</option>
+            <option>교육학과</option>
+            <option>특수·통합교육과</option>
+          </select>
+        </div>
+        <div class="field"><label>연락처 <span class="req">*</span></label><input type="tel" id="f-tel" placeholder="010-0000-0000" maxlength="13" oninput="fmtTel(this)"></div>
+        <div class="field"><label>이메일</label><input type="email" id="f-email" placeholder="example@gnue.ac.kr" maxlength="50"></div>
+      </div>
+    </div>
+
+    <!-- 다문화 교육 배경 -->
+    <div class="sec" id="sec-bg">
+      <div class="sec-head">
+        <div class="sico si-g"><i class="ti ti-school"></i></div>
+        <div><div class="sec-title">다문화 교육 배경</div><div class="sec-sub">해당하는 항목을 선택해 주세요</div></div>
+      </div>
+      <div class="field" style="margin-bottom:14px">
+        <label>다문화·이주배경 학생 지도 경험 <span class="req">*</span></label>
+        <div class="chips" id="rg-exp">
+          <label class="chip" onclick="pick('rg-exp',this)"><input type="radio" name="exp" value="있음">있음</label>
+          <label class="chip" onclick="pick('rg-exp',this)"><input type="radio" name="exp" value="없음">없음</label>
+          <label class="chip" onclick="pick('rg-exp',this)"><input type="radio" name="exp" value="실습 중">실습 중</label>
+        </div>
+      </div>
+      <div class="field">
+        <label id="lang-label">베트남어 학습 경험</label>
+        <div class="chips" id="rg-lang">
+          <label class="chip" onclick="pick('rg-lang',this)"><input type="radio" name="lang" value="전혀 없음">전혀 없음</label>
+          <label class="chip" onclick="pick('rg-lang',this)"><input type="radio" name="lang" value="조금 있음">조금 있음</label>
+          <label class="chip" onclick="pick('rg-lang',this)"><input type="radio" name="lang" value="일상 회화 가능">일상 회화 가능</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- 지원 동기 -->
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sico si-a"><i class="ti ti-pencil"></i></div>
+        <div><div class="sec-title">지원 동기 및 기대</div><div class="sec-sub">자유롭게 적어주세요</div></div>
+      </div>
+      <div class="field fg full" style="margin-bottom:12px">
+        <label>지원 동기 <span class="req">*</span></label>
+        <textarea id="f-motive" maxlength="300" placeholder="이음말 교실에 지원하는 이유나 계기를 적어주세요." oninput="cc('f-motive','cm')"></textarea>
+        <div class="ccount"><span id="cm">0</span>/300</div>
+      </div>
+      <div class="field fg full">
+        <label>참여 후 기대 사항</label>
+        <textarea id="f-expect" maxlength="200" placeholder="이 교실을 통해 얻고 싶은 것을 적어주세요." oninput="cc('f-expect','ce')"></textarea>
+        <div class="ccount"><span id="ce">0</span>/200</div>
+      </div>
+    </div>
+
+    <!-- 개인정보 동의 -->
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sico si-r"><i class="ti ti-shield-check"></i></div>
+        <div><div class="sec-title">개인정보 동의</div></div>
+      </div>
+      <label class="agree-box">
+        <input type="checkbox" id="chk-agree">
+        <span class="agree-txt">
+          <strong>개인정보 수집·이용에 동의합니다.</strong><br>
+          수집 항목: 이름, 학번, 학년, 심화전공, 연락처, 이메일 &nbsp;/&nbsp;
+          수집 목적: 이음말 교실 운영 및 개별 연락 &nbsp;/&nbsp;
+          보유 기간: 프로그램 종료 후 1년
+        </span>
+      </label>
+    </div>
+
+    <button class="btn-submit viet" id="btn-submit" onclick="doSubmit()">
+      <i class="ti ti-send"></i> <span id="btn-txt">베트남어 트랙 신청하기</span>
+    </button>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success-box" id="success-box">
+    <div class="s-circle viet" id="s-circle"><i class="ti ti-check"></i></div>
+    <h2>신청이 완료되었습니다!</h2>
+    <p>이음말 교실에 신청해 주셔서 감사합니다.<br>프로그램 일정 및 참여 안내는<br>등록하신 연락처로 별도 안내드립니다.</p>
+    <div class="s-track-badge viet" id="s-track-badge">🇻🇳 베트남어 트랙</div>
+    <div class="s-num" id="s-num">신청번호 #001</div>
+  </div>
+
+  <!-- ADMIN -->
+  <div style="text-align:center;margin-top:2.5rem">
+    <button class="nav-admin" onclick="openPw()" style="font-size:11px"><i class="ti ti-settings" style="font-size:11px;vertical-align:-1px;margin-right:4px"></i>관리자</button>
+  </div>
+
+  <div class="admin-panel" id="admin-panel">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:8px">
+      <div style="font-size:15px;font-weight:700;color:var(--txt)"><i class="ti ti-table" style="font-size:14px;vertical-align:-2px;margin-right:6px"></i>신청자 관리</div>
+    </div>
+    <div class="atabs">
+      <button class="atab av" id="atab-v" onclick="switchTab('viet')">🇻🇳 베트남어</button>
+      <button class="atab" id="atab-r" onclick="switchTab('russ')">🇷🇺 러시아어</button>
+    </div>
+    <div class="admin-ctrl">
+      <span class="admin-stat" id="admin-stat">0명 신청</span>
+      <div class="cap-row">
+        <label>정원</label>
+        <input type="number" id="cap-inp" value="30" min="1" max="300" onchange="setCap()">
+        <span style="font-size:12px;color:var(--txt3)">명</span>
+      </div>
+      <button class="bsm" onclick="dlCSV()"><i class="ti ti-download"></i> CSV</button>
+      <button class="bsm danger" onclick="clearTrack()"><i class="ti ti-trash"></i> 초기화</button>
+    </div>
+    <div id="tbl-wrap"></div>
+  </div>
+
+</div>
+
+<!-- PW MODAL -->
+<div class="overlay" id="pw-overlay">
+  <div class="pw-box">
+    <h3><i class="ti ti-lock" style="font-size:14px;vertical-align:-2px;margin-right:6px"></i>관리자 로그인</h3>
+    <input type="password" id="pw-inp" placeholder="비밀번호를 입력하세요" onkeydown="if(event.key==='Enter')chkPw()">
+    <div class="pw-err" id="pw-err">비밀번호가 올바르지 않습니다.</div>
+    <div class="pw-btns">
+      <button onclick="closePw()">취소</button>
+      <button class="pw-ok" onclick="chkPw()">확인</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =============================================
+   설정값 — 여기만 수정하세요
+============================================= */
+const GAS_URL  = 'https://script.google.com/macros/s/AKfycbxPn1XxSYNRvbQRnX2ugABUMQqaR6py0g_mYWJwwK5mRE9oFsBFdvsi40YmFEj04_vpgA/exec';        // 배포 후 받은 웹 앱 URL 붙여넣기
+const ADMIN_PW = 'gnue2025';
+const CAP_DEFAULT = 30;     // 트랙별 기본 정원
+
+/* ============================================= */
+
+const SK  = { viet:'eummal_viet_v3', russ:'eummal_russ_v3' };
+const CK  = { viet:'eummal_cap_viet_v3', russ:'eummal_cap_russ_v3' };
+let curTrack = 'viet';
+let adminTab  = 'viet';
+
+const getArr = t => { try { return JSON.parse(localStorage.getItem(SK[t])||'[]') } catch { return [] } };
+const saveArr = (t,a) => localStorage.setItem(SK[t], JSON.stringify(a));
+const getCap  = t => parseInt(localStorage.getItem(CK[t]) || CAP_DEFAULT);
+const saveCap = (t,n) => localStorage.setItem(CK[t], String(n));
+
+/* ── 유틸 ── */
+function fmtTel(el) {
+  let v = el.value.replace(/\D/g,'');
+  if (v.length <= 3)      el.value = v;
+  else if (v.length <= 7) el.value = v.slice(0,3)+'-'+v.slice(3);
+  else                    el.value = v.slice(0,3)+'-'+v.slice(3,7)+'-'+v.slice(7,11);
+}
+function cc(fid,cid) { document.getElementById(cid).textContent = document.getElementById(fid).value.length }
+function pick(gid,el) {
+  document.querySelectorAll('#'+gid+' .chip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  el.querySelector('input').checked = true;
+}
+
+/* ── 트랙 전환 ── */
+function selectTrack(t) {
+  curTrack = t;
+  document.querySelectorAll('.tab').forEach(el=>el.classList.remove('active'));
+  document.querySelector('.tab.'+t).classList.add('active');
+
+  const isR = t === 'russ';
+  ['sec-info','sec-bg'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) isR ? el.classList.add('russ-mode') : el.classList.remove('russ-mode');
+  });
+  document.getElementById('si-info').className = 'sico ' + (isR ? 'si-r' : 'si-v');
+  const tb = document.getElementById('track-banner');
+  tb.className = 'tbanner ' + t;
+  tb.textContent = isR ? '🇷🇺 러시아어 트랙으로 신청합니다' : '🇻🇳 베트남어 트랙으로 신청합니다';
+  document.getElementById('lang-label').textContent = isR ? '러시아어 학습 경험' : '베트남어 학습 경험';
+  const btn = document.getElementById('btn-submit');
+  btn.className = 'btn-submit ' + t;
+  document.getElementById('btn-txt').textContent = isR ? '러시아어 트랙 신청하기' : '베트남어 트랙 신청하기';
+  updateUI();
+}
+
+/* ── UI 갱신 ── */
+function updateUI() {
+  const t = curTrack;
+  const cap = getCap(t), used = getArr(t).length, rem = Math.max(0, cap-used);
+  const pct = Math.min(100, Math.round(used/cap*100));
+
+  document.getElementById('cap-disp').textContent    = cap;
+  document.getElementById('remain-disp').textContent = rem;
+  document.getElementById('applied-disp').textContent= used;
+
+  const rEl = document.getElementById('remain-disp');
+  rEl.className = 'snum' + (rem===0||rem<=Math.ceil(cap*.2) ? ' warn' : '');
+
+  const src = document.getElementById('sc-remain');
+  src.className = 'sc sc-remain' + (t==='russ' ? ' rm' : '');
+
+  const fill = document.getElementById('prog-fill');
+  fill.style.width = pct+'%';
+  fill.className = 'prog-fill' + (t==='russ'?' rm':'') + (pct>=80?' warn':'');
+
+  const closed = rem === 0;
+  document.getElementById('closed-banner').style.display = closed ? 'block' : 'none';
+  document.getElementById('form-area').style.display     = closed ? 'none'  : 'block';
+
+  ['viet','russ'].forEach(tr => {
+    const c=getCap(tr), a=getArr(tr).length, r=Math.max(0,c-a);
+    document.getElementById(tr+'-tab-sub').textContent =
+      r===0 ? '🔴 마감' : r<=Math.ceil(c*.2) ? '🟡 '+r+'석 남음' : '🟢 '+r+'석 남음';
+  });
+}
+
+/* ── 제출 ── */
+function doSubmit() {
+  const name  = document.getElementById('f-name').value.trim();
+  const sid   = document.getElementById('f-sid').value.trim();
+  const year  = document.getElementById('f-year').value;
+  const major = document.getElementById('f-major').value;
+  const tel   = document.getElementById('f-tel').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const exp   = document.querySelector('input[name="exp"]:checked');
+  const lang  = document.querySelector('input[name="lang"]:checked');
+  const mot   = document.getElementById('f-motive').value.trim();
+  const exp2  = document.getElementById('f-expect').value.trim();
+  const agr   = document.getElementById('chk-agree').checked;
+
+  if (!name||!sid||!year||!major||!tel) { alert('필수 항목을 모두 입력해 주세요.'); return }
+  if (!exp)  { alert('다문화 학생 지도 경험을 선택해 주세요.'); return }
+  if (!mot)  { alert('지원 동기를 입력해 주세요.'); return }
+  if (!agr)  { alert('개인정보 수집·이용에 동의해 주세요.'); return }
+
+  const arr = getArr(curTrack), cap = getCap(curTrack);
+  if (arr.length >= cap) { alert('모집이 마감되었습니다.'); updateUI(); return }
+
+  const num = String(arr.length+1).padStart(3,'0');
+  const now = new Date();
+  const ts  = now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+
+              String(now.getDate()).padStart(2,'0')+' '+String(now.getHours()).padStart(2,'0')+
+              ':'+String(now.getMinutes()).padStart(2,'0');
+
+  const payload = {
+    num, track: curTrack==='viet'?'베트남어':'러시아어',
+    name, sid, year, major, tel, email,
+    exp: exp.value, lang: lang?lang.value:'-',
+    motive: mot, expect: exp2, ts
+  };
+
+  // localStorage 즉시 저장
+  arr.push(payload);
+  saveArr(curTrack, arr);
+
+  // 버튼 로딩
+  const btn = document.getElementById('btn-submit');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i> 제출 중...';
+
+  // GAS 전송 — 완료 화면은 즉시 표시, 시트 전송은 백그라운드
+  if (GAS_URL) {
+    const fd = new FormData();
+    fd.append('data', JSON.stringify(payload));
+    fetch(GAS_URL, { method:'POST', body:fd }).catch(()=>{});
+  }
+
+  showSuccess(num, curTrack);
+}
+
+function showSuccess(num, t) {
+  document.getElementById('form-area').style.display  = 'none';
+  document.getElementById('closed-banner').style.display = 'none';
+  const sb = document.getElementById('success-box');
+  sb.style.display = 'block';
+  document.getElementById('s-circle').className = 's-circle '+t;
+  const stb = document.getElementById('s-track-badge');
+  stb.className = 's-track-badge '+t;
+  stb.textContent = t==='viet' ? '🇻🇳 베트남어 트랙' : '🇷🇺 러시아어 트랙';
+  document.getElementById('s-num').textContent = '신청번호 #'+num;
+  updateUI();
+}
+
+/* ── 관리자 ── */
+function switchTab(t) {
+  adminTab = t;
+  document.getElementById('atab-v').className = 'atab' + (t==='viet'?' av':'');
+  document.getElementById('atab-r').className = 'atab' + (t==='russ'?' ar':'');
+  document.getElementById('cap-inp').value = getCap(t);
+  renderTbl(); updateAdminStat();
+}
+function updateAdminStat() {
+  const a=getArr(adminTab), c=getCap(adminTab);
+  document.getElementById('admin-stat').textContent = `현재 ${a.length}명 신청 (정원 ${c}명)`;
+}
+function setCap() {
+  const v = parseInt(document.getElementById('cap-inp').value);
+  if (!isNaN(v)&&v>=1) { saveCap(adminTab,v); updateUI(); renderTbl(); updateAdminStat(); }
+}
+function renderTbl() {
+  const arr = getArr(adminTab), w = document.getElementById('tbl-wrap');
+  if (!arr.length) { w.innerHTML='<div class="no-data">아직 신청자가 없습니다.</div>'; return }
+  const cls = adminTab==='viet'?'v':'r';
+  let h = '<div style="overflow-x:auto"><table class="atbl"><thead><tr><th>#</th><th>이름</th><th>학번</th><th>학년</th><th>심화전공</th><th>연락처</th><th>경험</th><th>언어경험</th><th>신청일시</th></tr></thead><tbody>';
+  arr.forEach(r=>{
+    h+=`<tr><td><span class="nbadge ${cls}">#${r.num}</span></td><td>${r.name}</td><td>${r.sid}</td><td>${r.year}</td><td>${r.major}</td><td>${r.tel}</td><td>${r.exp}</td><td>${r.lang||'-'}</td><td>${r.ts}</td></tr>`;
+  });
+  h+='</tbody></table></div>';
+  w.innerHTML=h;
+}
+function dlCSV() {
+  const arr = getArr(adminTab);
+  if (!arr.length) { alert('다운로드할 데이터가 없습니다.'); return }
+  const tname = adminTab==='viet'?'베트남어':'러시아어';
+  const hd = ['번호','트랙','이름','학번','학년','심화전공','연락처','이메일','경험','언어경험','지원동기','기대사항','신청일시'];
+  const rows = arr.map(r=>[r.num,r.track||tname,r.name,r.sid,r.year,r.major,r.tel,r.email||'',r.exp,r.lang||'-','"'+(r.motive||'').replace(/"/g,'""')+'"','"'+(r.expect||'').replace(/"/g,'""')+'"',r.ts]);
+  const csv = '\uFEFF'+[hd,...rows].map(r=>r.join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'}));
+  a.download = `이음말교실_${tname}_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+}
+function clearTrack() {
+  const tname = adminTab==='viet'?'베트남어':'러시아어';
+  if (!confirm(`${tname} 트랙 신청 데이터를 전부 삭제하시겠습니까?`)) return;
+  localStorage.removeItem(SK[adminTab]);
+  updateUI(); renderTbl(); updateAdminStat();
+}
+
+/* ── PW ── */
+function openPw() {
+  document.getElementById('pw-overlay').classList.add('open');
+  document.getElementById('pw-inp').value='';
+  document.getElementById('pw-err').style.display='none';
+  setTimeout(()=>document.getElementById('pw-inp').focus(),60);
+}
+function closePw() { document.getElementById('pw-overlay').classList.remove('open') }
+function chkPw() {
+  if (document.getElementById('pw-inp').value===ADMIN_PW) {
+    closePw();
+    const p = document.getElementById('admin-panel');
+    p.style.display = p.style.display==='block'?'none':'block';
+    if (p.style.display==='block') { renderTbl(); updateAdminStat(); switchTab('viet'); p.scrollIntoView({behavior:'smooth'}); }
+  } else {
+    document.getElementById('pw-err').style.display='block';
+  }
+}
+
+// 초기화
+updateUI();
+</script>
+</body>
+</html>
