@@ -476,7 +476,22 @@ function selectTrack(t) {
   document.getElementById('btn-txt').textContent = isR ? '러시아어 트랙 신청하기' : '베트남어 트랙 신청하기';
   updateUI();
 }
-
+async function syncAndUpdate() {
+  if (!GAS_URL) { updateUI(); return; }
+  try {
+    const res = await fetch(GAS_URL, { cache: 'no-store' });
+    const data = await res.json();
+    if (data.vn !== undefined) {
+      const vnArr = getArr('viet');
+      const ruArr = getArr('russ');
+      while (vnArr.length < data.vn) vnArr.push({ _ghost: true });
+      while (ruArr.length < data.ru) ruArr.push({ _ghost: true });
+      saveArr('viet', vnArr);
+      saveArr('russ', ruArr);
+    }
+  } catch(e) {}
+  updateUI();
+}
 /* ── UI 갱신 ── */
 function updateUI() {
   const t = curTrack;
@@ -641,7 +656,7 @@ function chkPw() {
 }
 
 // 초기화
-updateUI();
+syncAndUpdate();
 </script>
 </body>
 </html>
